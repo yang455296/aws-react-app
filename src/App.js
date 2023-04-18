@@ -26,10 +26,10 @@ function App() {
   const MyComponent = examples[displayIndex].component
   return (
     <>
-      {selection}
+      {/* {selection}
       <p>元件檔案路徑: {examples[displayIndex].path}</p>
       <hr />
-      <MyComponent />
+      <MyComponent /> */}
     </>
   )
 }
