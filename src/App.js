@@ -1,41 +1,37 @@
-import './App.css';
+import { useState } from 'react'
+import { examples } from './examples'
 
 function App() {
+  const [displayIndex, setDisplayIndex] = useState(0)
+
+  const selection = (
+    <select
+      value={displayIndex}
+      onChange={(e) => {
+        setDisplayIndex(Number(e.target.value))
+      }}
+      // 注意資料類型
+    >
+      {examples.map((v, i) => {
+        return (
+          <option key={i} value={i}>
+            {v.name}
+          </option>
+        )
+      })}
+    </select>
+  )
+
+  // 動態元件語法，注意命名開頭英文一定要大寫
+  const MyComponent = examples[displayIndex].component
   return (
-    <div className="App">
-    <h1>作品集</h1>
-    <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">名稱</th>
-      <th scope="col">使用工具</th>
-      <th scope="col">日期</th>
-      <th scope="col">連結</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
-    </div>
-  );
+    <>
+      {selection}
+      <p>元件檔案路徑: {examples[displayIndex].path}</p>
+      <hr />
+      <MyComponent />
+    </>
+  )
 }
 
-export default App;
+export default App
